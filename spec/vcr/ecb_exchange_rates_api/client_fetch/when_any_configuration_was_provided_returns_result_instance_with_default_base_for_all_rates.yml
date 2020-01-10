@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.exchangeratesapi.io/latest
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 10 Jan 2020 21:27:18 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d0dda381eec90672f7a4fc804814cbdf11578691638; expires=Sun, 09-Feb-20
+        21:27:18 GMT; path=/; domain=.exchangeratesapi.io; HttpOnly; SameSite=Lax
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET
+      Cache-Control:
+      - max-age=1800
+      Cf-Cache-Status:
+      - EXPIRED
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 5531bbf299a8844c-KBP
+    body:
+      encoding: ASCII-8BIT
+      string: '{"rates":{"CAD":1.4498,"HKD":8.6137,"ISK":136.6,"PHP":55.998,"DKK":7.4731,"HUF":333.85,"CZK":25.265,"AUD":1.6132,"RON":4.7796,"SEK":10.551,"IDR":15263.99,"INR":78.6915,"BRL":4.5188,"RUB":68.041,"HRK":7.4445,"JPY":121.6,"THB":33.534,"CHF":1.0822,"SGD":1.4969,"PLN":4.2462,"BGN":1.9558,"TRY":6.5198,"CNY":7.6773,"NOK":9.8745,"NZD":1.6769,"ZAR":15.8081,"USD":1.1091,"MXN":20.8634,"ILS":3.8476,"GBP":0.8481,"KRW":1286.0,"MYR":4.5212},"base":"EUR","date":"2020-01-10"}'
+    http_version: 
+  recorded_at: Fri, 10 Jan 2020 21:27:18 GMT
+recorded_with: VCR 5.0.0

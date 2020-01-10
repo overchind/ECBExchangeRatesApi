@@ -1,0 +1,17 @@
+AllCops:
+  TargetRubyVersion: 2.3
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'ecb_exchange_rates_api.gemspec'
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Layout/LineLength:
+  Max: 120

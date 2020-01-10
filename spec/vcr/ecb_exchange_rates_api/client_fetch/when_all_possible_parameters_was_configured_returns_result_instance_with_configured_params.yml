@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.exchangeratesapi.io/history?base=USD&end_at=2014-09-02&start_at=2014-09-01&symbols=GBP,USD
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 10 Jan 2020 21:27:18 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d4a036f142f90a0dff8b49a5b4f09e0461578691638; expires=Sun, 09-Feb-20
+        21:27:18 GMT; path=/; domain=.exchangeratesapi.io; HttpOnly; SameSite=Lax
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET
+      Cache-Control:
+      - max-age=1800
+      Cf-Cache-Status:
+      - EXPIRED
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Vary:
+      - Accept-Encoding
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 5531bbf47c318b6e-KBP
+    body:
+      encoding: ASCII-8BIT
+      string: '{"rates":{"2014-09-01":{"USD":1.0,"GBP":0.6017284703},"2014-09-02":{"USD":1.0,"GBP":0.6048799085}},"start_at":"2014-09-01","base":"USD","end_at":"2014-09-02"}'
+    http_version: 
+  recorded_at: Fri, 10 Jan 2020 21:27:18 GMT
+recorded_with: VCR 5.0.0
