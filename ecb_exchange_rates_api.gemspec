@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
     This is an unofficial wrapper for the awesome, free ExchangeRatesAPI,
     which provides exchange rate lookups courtesy of the Central European Bank."
   DESCRIPTION
-  spec.homepage      = "https://github.com/overchind/ExchangeRatesAPI"
+  spec.homepage      = "https://github.com/overchind/ECBExchangeRatesApi"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
