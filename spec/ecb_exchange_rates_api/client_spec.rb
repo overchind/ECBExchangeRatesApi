@@ -52,4 +52,54 @@ RSpec.describe ECBExchangeRatesApi::Client do
       end
     end
   end
+
+  describe "#convert", :vcr do
+    context "when all parameters are configured with convert arguments and other options are not used" do
+      it "uses convert args and multiplies rates field with passed amount" do
+        fetch_result = client.with_base("USD").for_rates(%w[EUR SEK]).at("2007-09-16").fetch
+        convert_result = client.convert(20, "USD", %w[EUR SEK], "2007-09-16")
+        expect(convert_result).to be_a(ECBExchangeRatesApi::Result)
+
+        expect(convert_result.rates).to be_a(HashWithIndifferentAccess)
+        expect(convert_result.date).to be_a(String)
+        expect(convert_result.base).to be_a(String)
+        rates = fetch_result.rates.values.map { |v| v * 20 }
+        expect(convert_result.rates.values).to eq rates
+      end
+    end
+
+    context "when all parameters are configured with convert arguments and other options also present" do
+      it "uses convert args and multiplies rates field with passed amount" do
+        fetch_result = client.with_base("USD").for_rates(%w[EUR SEK]).at("2007-09-16").fetch
+        convert_result = client.with_base("EUR")
+                               .for_rates(%w[PHP RUB])
+                               .at("2009-01-01")
+                               .convert(20, "USD", %w[EUR SEK], "2007-09-16")
+        expect(convert_result).to be_a(ECBExchangeRatesApi::Result)
+
+        expect(convert_result.rates).to be_a(HashWithIndifferentAccess)
+        expect(convert_result.date).to be_a(String)
+        expect(convert_result.base).to be_a(String)
+        rates = fetch_result.rates.values.map { |v| v * 20 }
+        expect(convert_result.rates.values).to eq rates
+      end
+    end
+
+    context "when convert arguments skipped and other options present" do
+      it "uses client options and multiplies rates field with passed amount" do
+        fetch_result = client.with_base("USD").for_rates(%w[EUR SEK]).at("2007-09-16").fetch
+        convert_result = client.with_base("USD")
+                               .for_rates(%w[EUR SEK])
+                               .at("2007-09-16")
+                               .convert(20)
+        expect(convert_result).to be_a(ECBExchangeRatesApi::Result)
+
+        expect(convert_result.rates).to be_a(HashWithIndifferentAccess)
+        expect(convert_result.date).to be_a(String)
+        expect(convert_result.base).to be_a(String)
+        rates = fetch_result.rates.values.map { |v| v * 20 }
+        expect(convert_result.rates.values).to eq rates
+      end
+    end
+  end
 end

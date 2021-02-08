@@ -25,7 +25,7 @@ module ECBExchangeRatesApi
 
     def fetch
       response = self.class.get(path, query: options.to_params)
-      ECBExchangeRatesApi::Result.new(response.parsed_response, status: response.code)
+      create_result(response.parsed_response, response.code)
     end
 
     def from(date)
@@ -58,6 +58,17 @@ module ECBExchangeRatesApi
       self
     end
 
+    def convert(amount, base_code = nil, codes = nil, date = nil)
+      response = self.class.new do |client|
+        client.with_base presented_base(base_code)
+        client.for_rates presented_symbols(codes)
+        client.at presented_date(date)
+      end.fetch
+
+      response.rates.transform_values! { |v| v * amount }
+      response
+    end
+
     def currency_is_supported?(code)
       supported_currency?(validated_currency_code(code))
     end
@@ -76,6 +87,22 @@ module ECBExchangeRatesApi
       return "/history" if start_at && end_at
 
       "/latest"
+    end
+
+    def create_result(response, status)
+      ECBExchangeRatesApi::Result.new(response, status: status)
+    end
+
+    def presented_base(base_from_params)
+      base_from_params || base || default_base
+    end
+
+    def presented_symbols(codes)
+      (codes && Array.wrap(codes)) || symbols || []
+    end
+
+    def presented_date(date)
+      date || specific_date || current_date
     end
   end
 end

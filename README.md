@@ -29,8 +29,8 @@ Since the CurrencyExchangeAPI does not require API keys or authentication in ord
 Fetch the latest exchange rates from the European Central Bank:
 
 ```ruby
-query = ECBExchangeRatesApi::Client.new 
-query.fetch
+client = ECBExchangeRatesApi::Client.new 
+client.fetch
 ```
 
 ### Historical data:
@@ -38,13 +38,13 @@ query.fetch
 Get historical rates for any day since 1999:
 
 ```ruby
-query.at("2010-09-21").fetch
+client.at("2010-09-21").fetch
 ```
 
 or specify some date range:
 
 ```ruby
-query.from("2010-09-21").to("2010-10-21").fetch
+client.from("2010-09-21").to("2010-10-21").fetch
 ```
 
 ### Set the base currency:
@@ -52,16 +52,31 @@ query.from("2010-09-21").to("2010-10-21").fetch
 By default, the base currency is set to Euro (EUR), but it can be changed:
 
 ```ruby
-query.with_base("USD").fetch
+client.with_base("USD").fetch
 ```
 
 currency code should be passed as an ISO 4217 code.
 
 ### Fetch specific rates:
-If you do not want all current rates, it's possible to specify only the currencies you want using `for_rate(symbol)` or `for_rates(array_of_symbols)`. The following code fetches only the exchange rate between GBP and EUR:
+If you do not want all current rates, it's possible to specify only the currencies you want using with `for_rate(symbol)` or `for_rates(array_of_symbols)`. The following code fetches only the exchange rate between GBP and EUR:
 
 ```ruby
-query.with_base("GBP").for_rate("EUR").fetch
+client.with_base("GBP").for_rate("EUR").fetch
+```
+
+### Convert
+
+It is useful not just to check the exchange rates but also to calculate the amount of money for them. This is the case where the `convert` method comes into play. You can specify options with the method arguments `convert(amount, base, symbols, specific_data)` or use the preconfigured client as follow:
+
+```ruby
+client.convert(100, "USD", %w(EUR SEK), "2018-02-01")
+#or
+base_client = ECBExchangeRatesApi::Client.new do |c|
+  c.with_base "USD"
+  c.for_rates %w(EUR SEK)
+  c.at "2018-02-01"
+end
+base_client.convert(100)
 ```
 
 Please refer to the [API website](https://exchangeratesapi.io/) for further information and full API docs.

@@ -15,6 +15,14 @@ module ECBExchangeRatesApi
 
     private
 
+    def default_base
+      ECBExchangeRatesApi::Constants::DEFAULT_BASE
+    end
+
+    def current_date
+      represent_date(Time.now)
+    end
+
     def represent_date(date)
       return date.strftime("%Y-%m-%d") if time_or_date_instance?(date)
 

@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   DESCRIPTION
   spec.homepage      = "https://github.com/overchind/ECBExchangeRatesApi"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.7.1")
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
@@ -31,12 +31,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activesupport"
-  spec.add_dependency "httparty"
+  spec.add_dependency "activesupport", "~> 6.1.1"
+  spec.add_dependency "httparty", "~> 0.18.1"
 
-  spec.add_development_dependency "guard-rspec"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "vcr"
-  spec.add_development_dependency "webmock"
+  spec.add_development_dependency "guard-rspec", "~> 4.7.3"
+  spec.add_development_dependency "rspec", "~> 3.10.0"
+  spec.add_development_dependency "rubocop", "~> 1.9.1"
+  spec.add_development_dependency "vcr", "~> 6.0.0"
+  spec.add_development_dependency "webmock", "~> 3.11.2"
 end

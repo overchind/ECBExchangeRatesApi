@@ -2,6 +2,7 @@
 
 module ECBExchangeRatesApi
   module Constants
+    DEFAULT_BASE = "EUR"
     CURRENCIES = %w[USD GBP EUR JPY BGN CZK DKK HUF PLN RON
                     SEK CHF ISK NOK HRK RUB TRY AUD BRL CAD
                     CNY HKD IDR ILS INR KRW MXN MYR NZD PHP

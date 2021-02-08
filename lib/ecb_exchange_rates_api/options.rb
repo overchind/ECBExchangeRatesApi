@@ -8,6 +8,7 @@ module ECBExchangeRatesApi
     include SharedMethods
 
     attr_reader :start_at, :end_at, :specific_date, :base, :symbols
+
     date_attr_writer :start_at, :end_at, :specific_date
     code_attr_writer :base
 
@@ -31,7 +32,7 @@ module ECBExchangeRatesApi
 
     def options_params
       instance_variables.each_with_object({}) do |var, hash|
-        key = var.to_s[1..-1].to_sym
+        key = var.to_s[1..].to_sym
         variable = instance_variable_get(var)
         value = key == :symbols ? variable&.join(",") : variable
         hash[key] = value
