@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.exchangeratesapi.io/2013-12-24?access_key=cb3069b900a71e5d128f6d3777dc77b4&base=GBP&specific_date=2013-12-24&symbols=USD,CAD,EUR
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 18 Jul 2021 20:04:49 GMT
+      Content-Type:
+      - application/json; Charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Apilayer-Transaction-Id:
+      - c247254a-d13e-4667-a5d6-fd3c90eb31b2
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Request-Time:
+      - '0.007'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=gb0ch90lfQJxrGAUI%2B%2BkIZhOXhm4p128Y0RzK8oMJ1rQaY9YYccv6vUTE6G7NJm5yB3yl%2FaS%2F%2BqWr1bN3Xygr%2B70tuQSfqIaLOASP8ckYgOCP9q5KdHI5m5QzoU%2FxdPKWnDr2FHCPnM4"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 670e523f7e0c1d02-CPH
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"timestamp":1387929599,"historical":true,"base":"GBP","date":"2013-12-24","rates":{"USD":1.636492,"CAD":1.739516,"EUR":1.196476}}'
+  recorded_at: Sun, 18 Jul 2021 20:04:49 GMT
+recorded_with: VCR 6.0.0

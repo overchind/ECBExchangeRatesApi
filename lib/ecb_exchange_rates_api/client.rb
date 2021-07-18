@@ -2,6 +2,7 @@
 
 require "ecb_exchange_rates_api/options"
 require "ecb_exchange_rates_api/shared_methods"
+require "ecb_exchange_rates_api/endpoint_generator"
 require "forwardable"
 require "httparty"
 
@@ -15,28 +16,31 @@ module ECBExchangeRatesApi
 
     def_delegators :@options, :start_at, :end_at, :specific_date, :base, :symbols
 
-    base_uri "https://api.exchangeratesapi.io"
     format :json
 
-    def initialize
-      @options = ECBExchangeRatesApi::Options.new
+    def initialize(access_key:, secured: false)
+      @options = create_options(access_key, secured)
       yield self if block_given?
     end
 
     def fetch
-      response = self.class.get(path, query: options.to_params)
+      endpoint = EndpointGenerator.new(@options).call
+      response = self.class.get(endpoint, query: @options.to_params)
       create_result(response.parsed_response, response.code)
     end
 
-    def from(date)
-      @options.start_at = date
-      self
-    end
-
-    def to(date)
-      @options.end_at = date
-      self
-    end
+    # TODO
+    #
+    # Add tests for these methods. Change enpoint generation.
+    # def from(date)
+    #   @options.start_at = date
+    #   self
+    # end
+    #
+    # def to(date)
+    #   @options.end_at = date
+    #   self
+    # end
 
     def at(date)
       @options.specific_date = date
@@ -58,16 +62,10 @@ module ECBExchangeRatesApi
       self
     end
 
-    def convert(amount, base_code = nil, codes = nil, date = nil)
-      response = self.class.new do |client|
-        client.with_base presented_base(base_code)
-        client.for_rates presented_symbols(codes)
-        client.at presented_date(date)
-      end.fetch
-
-      response.rates.transform_values! { |v| v * amount }
-      response
-    end
+    # TODO
+    #
+    # Tests. Receive convert from endpoint.
+    # def convert; end
 
     def currency_is_supported?(code)
       supported_currency?(validated_currency_code(code))
@@ -79,14 +77,8 @@ module ECBExchangeRatesApi
 
     private
 
-    attr_reader :options
-
-    def path
-      return "/#{specific_date}" if specific_date
-
-      return "/history" if start_at && end_at
-
-      "/latest"
+    def create_options(access_key, secured)
+      ECBExchangeRatesApi::Options.new(access_key: access_key, secured: secured)
     end
 
     def create_result(response, status)

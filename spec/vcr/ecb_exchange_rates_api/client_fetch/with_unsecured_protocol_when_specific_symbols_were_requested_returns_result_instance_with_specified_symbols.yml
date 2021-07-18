@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.exchangeratesapi.io/latest?access_key=cb3069b900a71e5d128f6d3777dc77b4&symbols=DJF,NIO,DZD
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 18 Jul 2021 20:04:48 GMT
+      Content-Type:
+      - application/json; Charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Apilayer-Transaction-Id:
+      - 916d8a34-0d75-4f2d-94f1-33ce08731fce
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Request-Time:
+      - '0.013'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=YHhOrEGD40thSUzgRzxhNczNC6%2FqjPMHN31TdWnCHbiiBiM%2BDWApLR2S6rACynZ2s9CmFdSO2vaMIO%2BKU0aQ8KEkyB8KuE3xtO1BArAbyvHfjobUbD%2FDDjyr9UYcGvtPNsVG6dBFInfM"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 670e523c393f10b1-CPH
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"timestamp":1626638644,"base":"EUR","date":"2021-07-18","rates":{"DJF":210.19187,"NIO":41.236061,"DZD":159.264033}}'
+  recorded_at: Sun, 18 Jul 2021 20:04:48 GMT
+recorded_with: VCR 6.0.0

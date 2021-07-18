@@ -22,6 +22,7 @@ GEM
     crack (0.4.5)
       rexml
     diff-lcs (1.4.4)
+    dotenv (2.7.6)
     ffi (1.14.2)
     formatador (0.2.5)
     guard (2.16.2)
@@ -112,6 +113,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv (~> 2.7)
   ecb_exchange_rates_api!
   guard-rspec (~> 4.7.3)
   rspec (~> 3.10.0)

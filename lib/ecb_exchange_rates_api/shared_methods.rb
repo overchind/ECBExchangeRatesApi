@@ -39,7 +39,7 @@ module ECBExchangeRatesApi
       currency = sanitize_currency_code(code)
       raise InvalidCurrencyCodeError, "Ivalid code format #{code}" unless valid_currency_code_format?(currency)
 
-      raise InvalidCurrencyCodeError, "Unsupported currency #{code}" unless supported_currency?(currency)
+      return unless supported_currency?(currency)
 
       currency
     end

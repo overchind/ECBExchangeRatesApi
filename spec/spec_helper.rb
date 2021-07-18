@@ -4,6 +4,8 @@ require "bundler/setup"
 require "ecb_exchange_rates_api"
 require "webmock/rspec"
 require "vcr"
+require "dotenv"
+Dotenv.overload ".env.test"
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/vcr/"

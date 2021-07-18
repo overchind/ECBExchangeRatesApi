@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe ECBExchangeRatesApi::Options do
-  subject(:options) { described_class.new }
+  subject(:options) { described_class.new(access_key: access_key, secured: secured) }
+  let(:access_key) { "ACCESS_KEY" }
+  let(:secured) { false }
 
   shared_examples "computes date attribute writers" do
     subject(:assign_date) { options.send("#{accessor}=", date) }
@@ -94,7 +96,7 @@ RSpec.describe ECBExchangeRatesApi::Options do
 
     context "when currency is valid" do
       let(:currency) { "USD" }
-      let(:expected_result) { ["USD"] }
+      let(:expected_result) { Set.new(["USD"]) }
 
       it_behaves_like "computes valid currency symbol"
 
@@ -120,6 +122,7 @@ RSpec.describe ECBExchangeRatesApi::Options do
     let(:usd_base) { "USD" }
     let(:hash_with_configured_variables) do
       {
+        access_key: "ACCESS_KEY",
         start_at: start_at,
         base: usd_base
       }
