@@ -8,16 +8,16 @@ module ECBExchangeRatesApi
   class Options
     include SharedMethods
 
-    attr_reader :start_at, :end_at, :specific_date, :base, :symbols, :secured
+    attr_reader :start_date, :end_date, :specific_date, :base, :symbols, :secured
 
-    date_attr_writer :start_at, :end_at, :specific_date
+    date_attr_writer :start_date, :end_date, :specific_date
     code_attr_writer :base
 
     def initialize(access_key:, secured:)
       @access_key = access_key
       @secured    = secured
-      @start_at      = nil
-      @end_at        = nil
+      @start_date      = nil
+      @end_date        = nil
       @specific_date = nil
       @base          = nil
       @symbols       = Set.new

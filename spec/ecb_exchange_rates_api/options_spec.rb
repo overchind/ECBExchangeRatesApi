@@ -49,13 +49,13 @@ RSpec.describe ECBExchangeRatesApi::Options do
     end
   end
 
-  describe "#start_at=" do
-    let(:accessor) { :start_at }
+  describe "#start_date=" do
+    let(:accessor) { :start_date }
     it_behaves_like "computes date attribute writers"
   end
 
-  describe "#end_at" do
-    let(:accessor) { :end_at }
+  describe "#end_date" do
+    let(:accessor) { :end_date }
     it_behaves_like "computes date attribute writers"
   end
 
@@ -118,18 +118,18 @@ RSpec.describe ECBExchangeRatesApi::Options do
 
   describe "#to_params" do
     subject(:options_to_params) { options.to_params }
-    let(:start_at) { "2015-11-11" }
+    let(:start_date) { "2015-11-11" }
     let(:usd_base) { "USD" }
     let(:hash_with_configured_variables) do
       {
         access_key: "ACCESS_KEY",
-        start_at: start_at,
+        start_date: start_date,
         base: usd_base
       }
     end
 
     before do
-      options.start_at = start_at
+      options.start_date = start_date
       options.base = usd_base
     end
 

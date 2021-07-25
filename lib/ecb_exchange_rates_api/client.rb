@@ -14,7 +14,7 @@ module ECBExchangeRatesApi
 
     extend Forwardable
 
-    def_delegators :@options, :start_at, :end_at, :specific_date, :base, :symbols
+    def_delegators :@options, :start_date, :end_date, :specific_date, :base, :symbols
 
     format :json
 
@@ -29,18 +29,11 @@ module ECBExchangeRatesApi
       create_result(response.parsed_response, response.code)
     end
 
-    # TODO
-    #
-    # Add tests for these methods. Change enpoint generation.
-    # def from(date)
-    #   @options.start_at = date
-    #   self
-    # end
-    #
-    # def to(date)
-    #   @options.end_at = date
-    #   self
-    # end
+    def timeseries(start_date, end_date)
+      @options.start_date = start_date
+      @options.end_date = end_date
+      self
+    end
 
     def at(date)
       @options.specific_date = date

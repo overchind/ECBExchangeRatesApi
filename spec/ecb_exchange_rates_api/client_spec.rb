@@ -101,8 +101,8 @@ RSpec.describe ECBExchangeRatesApi::Client do
           expect(result).to be_a(ECBExchangeRatesApi::Result)
 
           expect(result.rates).to be_a(HashWithIndifferentAccess)
-          expect(result.start_at).to be_a(String)
-          expect(result.end_at).to be_a(String)
+          expect(result.start_date).to be_a(String)
+          expect(result.end_date).to be_a(String)
           expect(result.base).to be_a(String)
 
           expect(result.rates).to match(
@@ -110,8 +110,31 @@ RSpec.describe ECBExchangeRatesApi::Client do
             expected_to => hash_including(*expected_currencies_list)
           )
           expect(result.base).to eq expected_base
-          expect(result.start_at).to eq expected_from
-          expect(result.end_at).to eq expected_to
+          expect(result.start_date).to eq expected_from
+          expect(result.end_date).to eq expected_to
+        end
+      end
+
+      context "when time series are requested" do
+        it "returns results for all specified dates" do
+          expected_currencies_list = %w[USD SEK]
+          expected_start_date = "2013-12-24"
+          expected_end_date = "2013-12-26"
+          expected_rates_list = {
+            "2013-12-24" => hash_including(*expected_currencies_list),
+            "2013-12-25" => hash_including(*expected_currencies_list),
+            "2013-12-26" => hash_including(*expected_currencies_list)
+          }
+
+          result = described_class.new(access_key: access_key) do |client|
+            client.for_rates expected_currencies_list
+            client.timeseries expected_start_date, expected_end_date
+          end.fetch
+
+          expect(result.timeseries).to be_truthy
+          expect(result.start_date).to eq expected_start_date
+          expect(result.end_date).to eq expected_end_date
+          expect(result.rates).to match(expected_rates_list)
         end
       end
     end

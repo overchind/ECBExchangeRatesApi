@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.exchangeratesapi.io/timeseries?access_key=cb3069b900a71e5d128f6d3777dc77b4&end_date=2013-12-26&start_date=2013-12-24&symbols=USD,SEK
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 25 Jul 2021 17:21:18 GMT
+      Content-Type:
+      - application/json; Charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Apilayer-Transaction-Id:
+      - e47e50b5-abec-4b00-ba61-c782f14753c9
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Request-Time:
+      - '0.019'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=grJArRA2S2z0iDUH0CO8mPcpNFsIuPEPWRbCEVoiKAc%2BtvONYAdWCJIPW0uzkcHh0ip1mrBzib%2F6blJCs63EjxcLwomZWrO9hFukLJdpAf9nbb961aRMC9PV%2Fhb1o9UZCEc5pZfLkQaT"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 67471059ddde1d0e-CPH
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"timeseries":true,"start_date":"2013-12-24","end_date":"2013-12-26","base":"EUR","rates":{"2013-12-24":{"USD":1.367761,"SEK":8.982344},"2013-12-25":{"USD":1.368223,"SEK":8.990684},"2013-12-26":{"USD":1.369083,"SEK":8.974955}}}'
+  recorded_at: Sun, 25 Jul 2021 17:21:18 GMT
+recorded_with: VCR 6.0.0
