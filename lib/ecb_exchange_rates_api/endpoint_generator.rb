@@ -7,7 +7,8 @@ module ECBExchangeRatesApi
   # Presents API params
   class EndpointGenerator
     extend Forwardable
-    def_delegators :@options, :specific_date, :start_date, :end_date, :secured
+    def_delegators :@options, :date, :start_date, :end_date, :secured,
+                   :from, :to, :amount
 
     def initialize(options)
       @options = options
@@ -24,7 +25,9 @@ module ECBExchangeRatesApi
     end
 
     def path
-      return "/#{specific_date}" if specific_date
+      return "/convert" if from && to && amount
+
+      return "/#{date}" if date
 
       return "/timeseries" if start_date && end_date
 

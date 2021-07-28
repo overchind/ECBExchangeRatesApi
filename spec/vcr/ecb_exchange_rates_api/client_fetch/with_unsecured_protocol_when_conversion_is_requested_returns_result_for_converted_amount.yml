@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://api.exchangeratesapi.io/2013-12-24?access_key=cb3069b900a71e5d128f6d3777dc77b4&base=GBP&date=2013-12-24&symbols=USD,CAD,EUR
+    uri: http://api.exchangeratesapi.io/convert?access_key=cb3069b900a71e5d128f6d3777dc77b4&amount=100&from=USD&to=EUR
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 18 Jul 2021 20:04:49 GMT
+      - Wed, 28 Jul 2021 20:10:28 GMT
       Content-Type:
       - application/json; Charset=UTF-8
       Transfer-Encoding:
@@ -27,25 +27,25 @@ http_interactions:
       Connection:
       - keep-alive
       X-Apilayer-Transaction-Id:
-      - c247254a-d13e-4667-a5d6-fd3c90eb31b2
+      - 6a310d48-9acc-46f7-af2d-7c160779fc90
       Access-Control-Allow-Methods:
       - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       X-Request-Time:
-      - '0.007'
+      - '0.010'
       Cf-Cache-Status:
       - DYNAMIC
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=gb0ch90lfQJxrGAUI%2B%2BkIZhOXhm4p128Y0RzK8oMJ1rQaY9YYccv6vUTE6G7NJm5yB3yl%2FaS%2F%2BqWr1bN3Xygr%2B70tuQSfqIaLOASP8ckYgOCP9q5KdHI5m5QzoU%2FxdPKWnDr2FHCPnM4"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=0M7MMGj7OnD0HblFA7M4O9%2B2HneG89CPEkxDwE4mmmJhWT3gLN%2BQ1FUcMpTY5OHJugJAn5YImN4PXxrGZyOjMGPn1%2B1VxnS6Q%2FKGmJYt85eZEUcXODkMMbBD4L7wNvnKHoqyLvKJCosF"}],"group":"cf-nel","max_age":604800}'
       Nel:
       - '{"report_to":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Cf-Ray:
-      - 670e523f7e0c1d02-CPH
+      - 6760c0443d52737f-CPH
     body:
       encoding: ASCII-8BIT
-      string: '{"success":true,"timestamp":1387929599,"historical":true,"base":"GBP","date":"2013-12-24","rates":{"USD":1.636492,"CAD":1.739516,"EUR":1.196476}}'
-  recorded_at: Sun, 18 Jul 2021 20:04:49 GMT
+      string: '{"success":true,"query":{"from":"USD","to":"EUR","amount":100},"info":{"timestamp":1627503004,"rate":0.8443},"date":"2021-07-28","result":84.43}'
+  recorded_at: Wed, 28 Jul 2021 20:10:28 GMT
 recorded_with: VCR 6.0.0

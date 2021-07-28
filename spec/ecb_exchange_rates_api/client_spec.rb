@@ -137,55 +137,46 @@ RSpec.describe ECBExchangeRatesApi::Client do
           expect(result.rates).to match(expected_rates_list)
         end
       end
-    end
-  end
 
-  xdescribe "#convert", :vcr do
-    context "when all parameters are configured with convert arguments and other options are not used" do
-      it "uses convert args and multiplies rates field with passed amount" do
-        fetch_result = client.with_base("USD").for_rates(%w[EUR SEK]).at("2007-09-16").fetch
-        convert_result = client.convert(20, "USD", %w[EUR SEK], "2007-09-16")
-        expect(convert_result).to be_a(ECBExchangeRatesApi::Result)
+      context "when conversion is requested" do
+        it "returns result for converted amount" do
+          expected_from = "USD"
+          expected_to = "EUR"
+          expected_amount = 100
 
-        expect(convert_result.rates).to be_a(HashWithIndifferentAccess)
-        expect(convert_result.date).to be_a(String)
-        expect(convert_result.base).to be_a(String)
-        rates = fetch_result.rates.values.map { |v| v * 20 }
-        expect(convert_result.rates.values).to eq rates
-      end
-    end
+          result = described_class.new(access_key: access_key)
+                                  .convert(expected_from, expected_to, expected_amount)
+                                  .fetch
 
-    context "when all parameters are configured with convert arguments and other options also present" do
-      it "uses convert args and multiplies rates field with passed amount" do
-        fetch_result = client.with_base("USD").for_rates(%w[EUR SEK]).at("2007-09-16").fetch
-        convert_result = client.with_base("EUR")
-                               .for_rates(%w[PHP RUB])
-                               .at("2009-01-01")
-                               .convert(20, "USD", %w[EUR SEK], "2007-09-16")
-        expect(convert_result).to be_a(ECBExchangeRatesApi::Result)
+          expect(result.query[:from]).to eq expected_from
+          expect(result.query[:to]).to eq expected_to
+          expect(result.query[:amount]).to eq expected_amount
 
-        expect(convert_result.rates).to be_a(HashWithIndifferentAccess)
-        expect(convert_result.date).to be_a(String)
-        expect(convert_result.base).to be_a(String)
-        rates = fetch_result.rates.values.map { |v| v * 20 }
-        expect(convert_result.rates.values).to eq rates
-      end
-    end
+          expect(result.info.keys).to match %w[timestamp rate]
+          expect(result.result).to be_a(Float)
+        end
 
-    context "when convert arguments skipped and other options present" do
-      it "uses client options and multiplies rates field with passed amount" do
-        fetch_result = client.with_base("USD").for_rates(%w[EUR SEK]).at("2007-09-16").fetch
-        convert_result = client.with_base("USD")
-                               .for_rates(%w[EUR SEK])
-                               .at("2007-09-16")
-                               .convert(20)
-        expect(convert_result).to be_a(ECBExchangeRatesApi::Result)
+        context "for the specific date" do
+          it "returns result for converted amount" do
+            expected_from = "UAH"
+            expected_to = "USD"
+            expected_amount = 100
+            expected_at = "2020-07-28"
 
-        expect(convert_result.rates).to be_a(HashWithIndifferentAccess)
-        expect(convert_result.date).to be_a(String)
-        expect(convert_result.base).to be_a(String)
-        rates = fetch_result.rates.values.map { |v| v * 20 }
-        expect(convert_result.rates.values).to eq rates
+            result = described_class.new(access_key: access_key)
+                                    .convert(expected_from, expected_to, expected_amount)
+                                    .at(expected_at)
+                                    .fetch
+
+            expect(result.query[:from]).to eq expected_from
+            expect(result.query[:to]).to eq expected_to
+            expect(result.query[:amount]).to eq expected_amount
+
+            expect(result.date).to eq "2020-07-28"
+            expect(result.info.keys).to match %w[timestamp rate]
+            expect(result.result).to eq 3.6101 # should not be changed for historical data
+          end
+        end
       end
     end
   end

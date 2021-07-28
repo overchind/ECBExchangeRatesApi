@@ -59,8 +59,8 @@ RSpec.describe ECBExchangeRatesApi::Options do
     it_behaves_like "computes date attribute writers"
   end
 
-  describe "#specific_date" do
-    let(:accessor) { :specific_date }
+  describe "#date" do
+    let(:accessor) { :date }
     it_behaves_like "computes date attribute writers"
   end
 

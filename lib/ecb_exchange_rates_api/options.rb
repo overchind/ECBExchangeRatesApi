@@ -8,19 +8,24 @@ module ECBExchangeRatesApi
   class Options
     include SharedMethods
 
-    attr_reader :start_date, :end_date, :specific_date, :base, :symbols, :secured
+    attr_reader :start_date, :end_date, :date,
+                :base, :symbols, :from, :to, :secured
 
-    date_attr_writer :start_date, :end_date, :specific_date
-    code_attr_writer :base
+    date_attr_writer :start_date, :end_date, :date
+    code_attr_writer :base, :from, :to
+    attr_accessor :amount
 
     def initialize(access_key:, secured:)
-      @access_key = access_key
-      @secured    = secured
+      @access_key      = access_key
+      @secured         = secured
       @start_date      = nil
       @end_date        = nil
-      @specific_date = nil
-      @base          = nil
-      @symbols       = Set.new
+      @date            = nil
+      @from            = nil
+      @to              = nil
+      @amount          = nil
+      @base            = nil
+      @symbols         = Set.new
     end
 
     def append_symbol(code)
@@ -28,7 +33,7 @@ module ECBExchangeRatesApi
     end
 
     def to_params
-      public_params.reject { |_, val| val.nil? || val.empty? }
+      public_params.reject { |key, val| val.nil? || (key != :amount && val.empty?) }
     end
 
     private

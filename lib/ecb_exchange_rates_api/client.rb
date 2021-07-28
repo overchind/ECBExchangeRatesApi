@@ -14,7 +14,7 @@ module ECBExchangeRatesApi
 
     extend Forwardable
 
-    def_delegators :@options, :start_date, :end_date, :specific_date, :base, :symbols
+    def_delegators :@options, :start_date, :end_date, :date, :base, :symbols
 
     format :json
 
@@ -36,7 +36,7 @@ module ECBExchangeRatesApi
     end
 
     def at(date)
-      @options.specific_date = date
+      @options.date = date
       self
     end
 
@@ -55,10 +55,12 @@ module ECBExchangeRatesApi
       self
     end
 
-    # TODO
-    #
-    # Tests. Receive convert from endpoint.
-    # def convert; end
+    def convert(from, to, amount)
+      @options.from = from
+      @options.to = to
+      @options.amount = amount
+      self
+    end
 
     def currency_is_supported?(code)
       supported_currency?(validated_currency_code(code))
@@ -86,8 +88,8 @@ module ECBExchangeRatesApi
       (codes && Array.wrap(codes)) || symbols || []
     end
 
-    def presented_date(date)
-      date || specific_date || current_date
+    def presented_date(param)
+      param || date || current_date
     end
   end
 end
