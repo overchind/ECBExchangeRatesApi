@@ -25,15 +25,25 @@ module ECBExchangeRatesApi
     end
 
     def path
-      return "/fluctuation" if fluctuation
+      valid_endpoint = endpoints_validation.compact.keys.first
+      case valid_endpoint
+      when :date
+        "/#{date}"
+      when :default
+        "/latest"
+      else
+        "/#{valid_endpoint}"
+      end
+    end
 
-      return "/convert" if from && to && amount
-
-      return "/#{date}" if date
-
-      return "/timeseries" if start_date && end_date
-
-      "/latest"
+    def endpoints_validation
+      {
+        fluctuation: fluctuation,
+        convert: from && to && amount,
+        date: date,
+        timeseries: start_date && end_date,
+        default: true
+      }
     end
 
     def protocol
