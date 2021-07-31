@@ -13,7 +13,7 @@ module ECBExchangeRatesApi
 
     date_attr_writer :start_date, :end_date, :date
     code_attr_writer :base, :from, :to
-    attr_accessor :amount
+    attr_accessor :amount, :fluctuation
 
     def initialize(access_key:, secured:)
       @access_key      = access_key
@@ -32,7 +32,7 @@ module ECBExchangeRatesApi
     private
 
     def public_params
-      options_params.except(:secured)
+      options_params.except(:secured, :fluctuation)
     end
 
     def options_params

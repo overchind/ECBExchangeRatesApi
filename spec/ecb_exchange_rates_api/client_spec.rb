@@ -84,37 +84,6 @@ RSpec.describe ECBExchangeRatesApi::Client do
         end
       end
 
-      context "when all possible parameters was configured" do
-        xit "returns result instance with configured params" do
-          expected_base = "USD"
-          expected_currencies_list = %w[GBP USD]
-          expected_from = "2014-09-01"
-          expected_to = "2014-09-02"
-
-          result = described_class.new(access_key: access_key) do |client|
-            client.with_base expected_base
-            client.for_rates expected_currencies_list
-            client.from expected_from
-            client.to expected_to
-          end
-
-          expect(result).to be_a(ECBExchangeRatesApi::Result)
-
-          expect(result.rates).to be_a(HashWithIndifferentAccess)
-          expect(result.start_date).to be_a(String)
-          expect(result.end_date).to be_a(String)
-          expect(result.base).to be_a(String)
-
-          expect(result.rates).to match(
-            expected_from => hash_including(*expected_currencies_list),
-            expected_to => hash_including(*expected_currencies_list)
-          )
-          expect(result.base).to eq expected_base
-          expect(result.start_date).to eq expected_from
-          expect(result.end_date).to eq expected_to
-        end
-      end
-
       context "when time series are requested" do
         it "returns results for all specified dates" do
           expected_currencies_list = %w[USD SEK]
@@ -175,6 +144,32 @@ RSpec.describe ECBExchangeRatesApi::Client do
             expect(result.date).to eq "2020-07-28"
             expect(result.info.keys).to match %w[timestamp rate]
             expect(result.result).to eq 3.6101 # should not be changed for historical data
+          end
+        end
+      end
+
+      context "when rates are requested with fluctuation" do
+        it "returns fluctuation between dates for requested rates" do
+          expected_base = "AUD"
+          expected_currencies_list = %w[GBP SEK]
+          expected_from = "2014-09-01"
+          expected_to = "2014-09-05"
+
+          result = described_class.new(access_key: access_key) do |client|
+            client.with_base expected_base
+            client.for_rates expected_currencies_list
+            client.timeseries expected_from, expected_to
+            client.fluctuation
+          end.fetch
+
+          expect(result.fluctuation).to be_truthy
+          expect(result.start_date).to eq expected_from
+          expect(result.end_date).to eq expected_to
+          expect(result.base).to eq expected_base
+          expect(result.rates.keys).to eq expected_currencies_list
+
+          result.rates.each do |_, rate|
+            expect(rate.keys).to eq %w[start_rate end_rate change change_pct]
           end
         end
       end

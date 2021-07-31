@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.exchangeratesapi.io/fluctuation?access_key=cb3069b900a71e5d128f6d3777dc77b4&base=AUD&end_date=2014-09-05&start_date=2014-09-01&symbols=GBP,SEK
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 31 Jul 2021 14:21:12 GMT
+      Content-Type:
+      - application/json; Charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Apilayer-Transaction-Id:
+      - 40137c68-cc26-4e2a-8e47-3d16fbb052d9
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Request-Time:
+      - '0.010'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=Q4u6gN9BBwJmM5zD2nGPirTpXA1ZZvN8cgB%2FKF0hhkl1zPP160k2Lj32qjmgHHq0taLywF1sZ1MferY%2FkhT%2BGWZ5uGc0gwy9tXaWcUGxw%2FYWhTM0IEIoNUnx5IbhiRCeMAXByFr%2BmNRl"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 677778c4ffef1d22-CPH
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"fluctuation":true,"start_date":"2014-09-01","end_date":"2014-09-05","base":"AUD","rates":{"GBP":{"start_rate":0.56191,"end_rate":0.574359,"change":0.0124,"change_pct":2.2155},"SEK":{"start_rate":6.533646,"end_rate":6.641687,"change":0.108,"change_pct":1.6536}}}'
+  recorded_at: Sat, 31 Jul 2021 14:21:12 GMT
+recorded_with: VCR 6.0.0

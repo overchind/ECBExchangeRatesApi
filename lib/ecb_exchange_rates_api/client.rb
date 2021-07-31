@@ -62,6 +62,11 @@ module ECBExchangeRatesApi
       self
     end
 
+    def fluctuation(enable: true)
+      @options.fluctuation = enable
+      self
+    end
+
     def currency_is_supported?(code)
       supported_currency?(validated_currency_code(code))
     end
