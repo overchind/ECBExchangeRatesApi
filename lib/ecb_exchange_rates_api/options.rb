@@ -25,10 +25,14 @@ module ECBExchangeRatesApi
     end
 
     def to_params
-      public_params.reject { |key, val| val.nil? || (key != :amount && val.empty?) }
+      public_params.reject { |_, val| val.nil? || blank?(val) }
     end
 
     private
+
+    def blank?(obj)
+      obj.respond_to?(:empty?) ? !!obj.empty? : !obj
+    end
 
     def public_params
       options_params.except(:fluctuation)

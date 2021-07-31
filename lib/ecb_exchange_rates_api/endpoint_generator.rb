@@ -26,7 +26,7 @@ module ECBExchangeRatesApi
     end
 
     def path
-      valid_endpoint = endpoints_validation.compact.keys.first
+      valid_endpoint = valid_endpoints.keys.first
       case valid_endpoint
       when :date
         "/#{date}"
@@ -37,14 +37,14 @@ module ECBExchangeRatesApi
       end
     end
 
-    def endpoints_validation
+    def valid_endpoints
       {
         fluctuation: fluctuation,
         convert: from && to && amount,
         date: date,
         timeseries: start_date && end_date,
         default: true
-      }
+      }.reject { |_, v| v.nil? || !v }
     end
 
     def protocol
