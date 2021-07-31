@@ -18,13 +18,6 @@ module ECBExchangeRatesApi
     def initialize(access_key:, secured:)
       @access_key      = access_key
       @secured         = secured
-      @start_date      = nil
-      @end_date        = nil
-      @date            = nil
-      @from            = nil
-      @to              = nil
-      @amount          = nil
-      @base            = nil
       @symbols         = Set.new
     end
 
