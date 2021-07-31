@@ -9,15 +9,14 @@ module ECBExchangeRatesApi
     include SharedMethods
 
     attr_reader :start_date, :end_date, :date,
-                :base, :symbols, :from, :to, :secured
+                :base, :symbols, :from, :to
 
     date_attr_writer :start_date, :end_date, :date
     code_attr_writer :base, :from, :to
     attr_accessor :amount, :fluctuation
 
-    def initialize(access_key:, secured:)
+    def initialize(access_key:)
       @access_key      = access_key
-      @secured         = secured
       @symbols         = Set.new
     end
 
@@ -32,7 +31,7 @@ module ECBExchangeRatesApi
     private
 
     def public_params
-      options_params.except(:secured, :fluctuation)
+      options_params.except(:fluctuation)
     end
 
     def options_params

@@ -19,12 +19,13 @@ module ECBExchangeRatesApi
     format :json
 
     def initialize(access_key:, secured: false)
-      @options = create_options(access_key, secured)
+      @options = create_options(access_key)
+      @secured = secured
       yield self if block_given?
     end
 
     def fetch
-      endpoint = EndpointGenerator.new(@options).call
+      endpoint = EndpointGenerator.new(@options, @secured).call
       response = self.class.get(endpoint, query: @options.to_params)
       create_result(response.parsed_response, response.code)
     end
@@ -77,8 +78,8 @@ module ECBExchangeRatesApi
 
     private
 
-    def create_options(access_key, secured)
-      ECBExchangeRatesApi::Options.new(access_key: access_key, secured: secured)
+    def create_options(access_key)
+      ECBExchangeRatesApi::Options.new(access_key: access_key)
     end
 
     def create_result(response, status)

@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe ECBExchangeRatesApi::Options do
-  subject(:options) { described_class.new(access_key: access_key, secured: secured) }
+  subject(:options) { described_class.new(access_key: access_key) }
   let(:access_key) { "ACCESS_KEY" }
-  let(:secured) { false }
 
   shared_examples "computes date attribute writers" do
     subject(:assign_date) { options.send("#{accessor}=", date) }

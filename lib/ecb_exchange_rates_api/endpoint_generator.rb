@@ -7,11 +7,12 @@ module ECBExchangeRatesApi
   # Presents API params
   class EndpointGenerator
     extend Forwardable
-    def_delegators :@options, :date, :start_date, :end_date, :secured,
+    def_delegators :@options, :date, :start_date, :end_date,
                    :from, :to, :amount, :fluctuation
 
-    def initialize(options)
+    def initialize(options, secured)
       @options = options
+      @secured = secured
     end
 
     def call
@@ -47,7 +48,7 @@ module ECBExchangeRatesApi
     end
 
     def protocol
-      secured ? "https" : "http"
+      @secured ? "https" : "http"
     end
   end
 end
