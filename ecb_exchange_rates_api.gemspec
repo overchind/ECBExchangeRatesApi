@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activesupport", "~> 6.1.1"
-  spec.add_dependency "httparty", "~> 0.18.1"
+  spec.add_dependency "httparty", ">= 0.18.1", "< 0.22.0"
 
   spec.add_development_dependency "guard-rspec", "~> 4.7.3"
   spec.add_development_dependency "rspec", "~> 3.10.0"
